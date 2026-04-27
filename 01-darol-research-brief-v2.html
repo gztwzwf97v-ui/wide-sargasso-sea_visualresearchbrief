@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wide Sargasso Sea — Research Brief for Darol Olu Kae</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --ink: #0A0806;
+  --page: #EDE8DF;
+  --flame: #C44E1C;
+  --ochre: #B8882E;
+  --ash: #9A9088;
+  --ghost: #C8C0B0;
+  --thermal: #3D7A8A;
+  --deep-red: #7A1C1C;
+  --cream: #F2EDE4;
+  --maroon: #5C1A1A;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background-color: var(--ink);
+  color: var(--page);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: overlay;
+}
+
+.page { max-width: 820px; margin: 0 auto; padding: 80px 44px 140px; }
+
+.masthead {
+  border-top: 1px solid var(--flame);
+  padding-top: 52px;
+  margin-bottom: 72px;
+  animation: rise 1.2s ease both;
+}
+
+.date-line {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--ash);
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+.stamp {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--flame);
+  margin-bottom: 36px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.film-title {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.015em;
+  color: var(--cream);
+}
+
+.film-title em { font-style: italic; color: var(--ghost); }
+
+.film-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ash);
+  margin-top: 22px;
+}
+
+.rule-short { width: 32px; height: 1px; background: var(--ochre); margin: 36px 0; }
+
+.intro { margin-bottom: 80px; animation: rise 1.1s 0.15s ease both; }
+
+.to-line {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--flame);
+  margin-bottom: 22px;
+}
+
+.intro p { font-size: 1.2rem; line-height: 1.95; color: var(--ghost); max-width: 660px; }
+.intro p + p { margin-top: 1.1em; }
+.intro strong { font-weight: 600; color: var(--cream); font-style: italic; }
+
+.premise {
+  border-left: 3px solid var(--flame);
+  border-top: 1px solid rgba(196,78,28,0.25);
+  border-bottom: 1px solid rgba(196,78,28,0.25);
+  padding: 34px 38px;
+  margin: 0 0 80px;
+  background: rgba(196,78,28,0.04);
+  animation: rise 1.1s 0.25s ease both;
+}
+
+.premise .box-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--flame);
+  margin-bottom: 18px;
+}
+
+.premise p { font-size: 1.15rem; line-height: 1.9; color: var(--cream); font-style: italic; }
+.premise p + p { margin-top: 1em; }
+
+.windward-orient {
+  margin-bottom: 80px;
+  padding: 24px 30px;
+  border: 1px solid rgba(184,136,46,0.3);
+  border-left: 2px solid var(--ochre);
+  background: rgba(184,136,46,0.03);
+  animation: rise 1.1s 0.27s ease both;
+}
+
+.windward-orient .box-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  margin-bottom: 14px;
+}
+
+.windward-orient p { font-size: 1.05rem; line-height: 1.85; color: var(--ghost); }
+.windward-orient p + p { margin-top: 0.9em; }
+
+.intent-note {
+  margin-bottom: 80px;
+  padding: 28px 0;
+  border-top: 1px solid rgba(154,144,136,0.2);
+  border-bottom: 1px solid rgba(154,144,136,0.2);
+  animation: rise 1.1s 0.3s ease both;
+}
+
+.intent-note p { font-size: 1.1rem; color: var(--ash); line-height: 1.9; font-style: italic; max-width: 640px; }
+
+.divider { margin: 56px 0; display: flex; align-items: center; gap: 18px; }
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: rgba(154,144,136,0.15); }
+.divider-mark {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.54rem;
+  letter-spacing: 0.22em;
+  color: var(--ash);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.section { margin-bottom: 72px; animation: rise 1s ease both; }
+
+.section-header { margin-bottom: 28px; }
+
+.section-number {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--flame);
+  letter-spacing: 0.18em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.section-title { font-size: 1.9rem; font-weight: 400; color: var(--cream); line-height: 1.15; }
+.section-title em { font-style: italic; color: var(--ghost); }
+
+.section-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--ash);
+  text-transform: uppercase;
+  margin-top: 8px;
+  display: block;
+}
+
+.section-body { font-size: 1.1rem; line-height: 1.92; color: var(--ghost); max-width: 660px; }
+.section-body p + p { margin-top: 1em; }
+.section-body strong { font-weight: 600; color: var(--cream); }
+
+.section-body a {
+  color: var(--ochre);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(184,136,46,0.3);
+  transition: border-color 0.2s ease;
+}
+.section-body a:hover { border-color: var(--ochre); }
+
+.threads { margin-top: 22px; list-style: none; padding-left: 0; }
+
+.threads li {
+  display: flex;
+  gap: 18px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(154,144,136,0.1);
+  font-size: 1.05rem;
+  color: var(--ghost);
+  line-height: 1.7;
+}
+
+.threads li::before {
+  content: '/';
+  color: var(--flame);
+  flex-shrink: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  margin-top: 4px;
+  opacity: 0.8;
+}
+
+.threads li strong { color: var(--cream); font-weight: 600; }
+
+.threads li a {
+  color: var(--ochre);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(184,136,46,0.3);
+}
+.threads li a:hover { border-color: var(--ochre); }
+
+.script-note {
+  margin-top: 18px;
+  padding: 14px 20px;
+  border-left: 2px solid rgba(196,78,28,0.4);
+  background: rgba(196,78,28,0.04);
+}
+
+.script-note p {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  line-height: 1.65;
+  color: var(--ash);
+  letter-spacing: 0.04em;
+}
+
+.script-note p strong { color: var(--flame); font-weight: 500; }
+
+.epigraph {
+  margin: 0 0 28px;
+  padding: 18px 24px;
+  border-left: 2px solid var(--deep-red);
+  background: rgba(122,28,28,0.05);
+}
+
+.epigraph p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--cream);
+  font-style: italic;
+}
+
+.epigraph .attr {
+  display: block;
+  margin-top: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ash);
+  font-style: normal;
+}
+
+.tag {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border: 1px solid;
+  margin-left: 7px;
+  vertical-align: middle;
+  opacity: 0.75;
+}
+
+.tag-thermal { color: var(--thermal); border-color: var(--thermal); }
+.tag-freedom { color: var(--deep-red); border-color: var(--deep-red); }
+
+.section-freedom {
+  border: 1px solid rgba(122,28,28,0.35);
+  border-left: 3px solid var(--deep-red);
+  padding: 36px 38px;
+  margin-bottom: 72px;
+  background: rgba(122,28,28,0.04);
+}
+
+.section-freedom .section-number { color: var(--deep-red); }
+
+.section-missing {
+  border: 1px solid rgba(61,122,138,0.3);
+  border-left: 3px solid var(--thermal);
+  padding: 36px 38px;
+  margin-bottom: 72px;
+  background: rgba(61,122,138,0.03);
+}
+
+.section-missing .section-number { color: var(--thermal); }
+
+.provocation-box {
+  margin-top: 22px;
+  padding: 20px 24px;
+  border: 1px dashed rgba(184,136,46,0.4);
+  background: rgba(184,136,46,0.03);
+}
+
+.provocation-box .box-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  margin-bottom: 12px;
+}
+
+.provocation-box p { font-size: 1rem; color: var(--ghost); line-height: 1.75; font-style: italic; }
+.provocation-box p + p { margin-top: 0.8em; }
+
+.closing { margin-top: 88px; padding-top: 44px; border-top: 1px solid rgba(196,78,28,0.3); }
+
+.closing p { font-size: 1.15rem; font-style: italic; color: var(--ghost); line-height: 1.95; max-width: 620px; }
+.closing p + p { margin-top: 1.2em; }
+
+.sign { margin-top: 52px; }
+.sign .name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--cream);
+  font-weight: 500;
+}
+.sign .date {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  color: var(--ash);
+  margin-top: 6px;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .page { padding: 48px 22px 100px; }
+  .film-title { font-size: 2.6rem; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="masthead">
+  <p class="date-line">Monday 27th April 2026</p>
+  <div class="stamp">
+    <span>Research Brief</span>
+    <span>Confidential</span>
+    <span>Draft 3 / 2026</span>
+  </div>
+  <h1 class="film-title"><em>Wide Sargasso Sea</em></h1>
+  <p class="film-meta">Feature Film &nbsp;/&nbsp; In Development &nbsp;/&nbsp; Written and Directed by Jenn Nkiru</p>
+  <div class="rule-short"></div>
+</header>
+
+<div class="intro">
+  <p class="to-line">For: Darol Olu Kae</p>
+  <p>Darol. You know how we work. Messy first, clean later. Maybe never clean. This is a messy brief by design. Everything here is a path beginner, not a path consolidator. I am not handing you a map, I am pointing toward the territory. Go where it takes you. Bring back what you find, not what you were sent to find.</p>
+  <p>The script is coming to you separately, watermarked. <strong>Read this document first, and then keep it alongside the script as you go.</strong> Let them contaminate each other. What I am building toward lives in the friction between these pages and that one.</p>
+  <p>Explore wide before you go deep. And then go very deep. Bring the mess, the strange, the buried, the dusted off. The images that need finding rather than searching. That is the only instruction that matters.</p>
+</div>
+
+<div class="premise">
+  <p class="box-label">The Film / Central Premise</p>
+  <p>This is an adaptation of <strong>Jean Rhys's Wide Sargasso Sea</strong>, published in 1966, now sixty years behind us. Rhys wrote it as a counter to Charlotte Brontë's Jane Eyre, restoring interiority and authorship to the woman Brontë had locked in the attic: Antoinette Cosway, Creole, Jamaican, dispossessed, called mad. Rhys wrote her back into existence.</p>
+  <p>Wide Sargasso Sea has been adapted before, but never through a contemporary cinematic language that fully realises the scale, psychology, and political resonance of Rhys's intervention. Those earlier versions approached the text as literary translation. This film approaches it as <em>reactivation</em>. My adaptation does not treat the novel as heritage but as living architecture, a story that speaks directly to how power, identity, and inheritance continue to shape the present.</p>
+  <p>This is a period piece, but one that takes a new approach to period itself. The sound is achronological, gestures across time. The dialogue feels like now. Visual references collapse decades and centuries deliberately. The film is rooted in the years following the Emancipation Act of 1833 and completely alive to the present moment. Past, present, and future are not sequential here. They speak to each other constantly. This is not a repetition of what has been done before. It is a redefinition.</p>
+  <p>Antoinette's world is primarily Jamaican. Christophine and Annette carry Francophone Creole culture into the heart of the story. The honeymoon at Granbois extends the geography into the Windward Islands. England is the cold white endpoint until it is not. The film opens on fire and ends on a laugh above a clear sea. What happens between those two moments is this film's argument about knowledge, power, perception, and what it means to be free.</p>
+</div>
+
+<div class="windward-orient">
+  <p class="box-label">A Quick Orientation / Jamaica and the Windward Islands</p>
+  <p>The film moves between Jamaica (where Antoinette is from, where her childhood unfolds at Coulibri) and the Windward Islands (where the honeymoon at Granbois takes place). Worth knowing the difference.</p>
+  <p><strong>Jamaica</strong> is the largest island of the Greater Antilles, primarily Anglophone, with a deep Creole culture, a vast and influential musical tradition, and a long history of resistance, including Tacky's Rebellion and the Maroon Wars.</p>
+  <p><strong>The Windward Islands</strong> are the southern part of the Lesser Antilles, a chain that includes Martinique (French), Dominica (English-speaking with deep French Creole heritage), Saint Lucia (English-speaking with strong French Creole heritage), Saint Vincent and the Grenadines, and Grenada. The region is a bilingual Creole space, mixing Anglophone and Francophone traditions, with French Creole culture and language surviving across the formally English-speaking islands. Christophine is from Martinique. Her French Creole vocabulary, her spiritual practice, her relationship to the land, all carry a different register from Jamaica even as they share an African root and a Caribbean shape.</p>
+</div>
+
+<div class="intent-note">
+  <p>A note on how to use this: these are thought starters, not thought consolidators. Think of each thread as an open door. The most valuable research you will bring back will be the thing you found in a room I did not know existed. The best image will be one neither of us has seen. The best connection will be the one that should not make sense but does.</p>
+</div>
+
+<div class="divider"><span class="divider-mark">The Three Registers</span></div>
+
+<div class="section">
+  <div class="section-header">
+    <h2 class="section-title" style="font-size:1.5rem;">An Operating Framework</h2>
+    <span class="section-sub">How this film thinks about every scene, every object, every image</span>
+  </div>
+  <div class="section-body">
+    <p>Everything in this film is operating simultaneously on three registers. The <strong>material</strong> register: what is literally present, the dialogue on the page, the object in the room, the body in the space. The <strong>spiritual</strong> register: what the scene holds beyond its surface, what is being enacted at the level of belief, protection, power, and ritual. The <strong>ancestral</strong> register: what the moment carries from what came before and what it carries forward to those who will come after. The ancestral is not only past. It is also the ancestor we are becoming for those who follow.</p>
+    <p>These three registers are never separate. Christophine's mortar is a kitchen tool (material), a site of Obeah preparation (spiritual), and an object whose form and use carry West African knowledge across the catastrophe of the Middle Passage and forward into a future that has not yet arrived (ancestral). Antoinette's white dress trailing in brown mud is a ruined garment (material), a crossing from one world into another (spiritual), and an image saturated with the history of racial categorisation in the Caribbean and with the futures it forecloses and opens (ancestral).</p>
+    <p>A musical analogy: the material is the drum, the spiritual is the bass, the ancestral is the vocal carrying across generations. The drum is the first telephone. The vocal carrying across generations is the message it transmits. Every scene has all three playing at once. Every piece of research you bring back should be able to speak on all three registers. If it only speaks on one, keep digging.</p>
+  </div>
+</div>
+
+<div class="divider"><span class="divider-mark">Research Threads</span></div>
+
+<!-- 01 NATURE -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">01</span>
+    <h2 class="section-title">Nature / <em>Environment</em></h2>
+    <span class="section-sub">The land as character, pressure, memory, and force</span>
+  </div>
+  <div class="section-body">
+    <p>The Caribbean landscape in this script is not backdrop. It is participant. Rochester looks out of the carriage window and sees green that is "too green, too dense, too vivid." Antoinette walks through the woods and "plants and trees yield to her passage." The forest swallows a road whole. The pool is "blue-black water surrounded by silver rocks." The garden at Coulibri is "every shade of green growing wild." This landscape has its own agency. Research it that way.</p>
+    <ul class="threads">
+      <li>The density, saturation, and sensory pressure of the Jamaican landscape. Overgrowth, heat, soil, decay, and bloom as simultaneous and inseparable states. Excess as its own form of consciousness.</li>
+      <li>The botanical specifics of what grows in this world. Royal palms, flamboyant trees, jasmine, octopus orchids, tree ferns, mango, guava, sargassum. The spiritual and pharmacological resonances of each beyond their names.</li>
+      <li>Colonial cartography and the violence inside it. How land was named, divided, surveyed, and represented. What gets erased in the act of making a map. The relationship between naming a place and claiming it.</li>
+      <li>The plantation landscape as psychological space. How the built geography of slavery persists long after its formal end. Ruined great houses, overgrown cane fields, the road that disappears back into forest. In Scene 31, Rochester finds a paved road with orange flowers that vanishes when he turns around. That image is doing something important spatially and spiritually.</li>
+      <li>The tropical sublime as a contested aesthetic category. Who is permitted to find this landscape beautiful and what that permission costs. The coloniser's gaze on Caribbean nature as both desire and terror operating simultaneously.</li>
+      <li>Wilson Harris, Palace of the Peacock (1960). The Guyanese rainforest as interior journey, historical haunting, and consciousness expanding beyond ordinary perception.</li>
+      <li>Derek Walcott on Caribbean landscape as wound and source. The Sea is History in particular. The sea as archive, as the place where the unrecorded dead are held.</li>
+      <li>The Sargasso Sea as a physical and metaphorical space. An ocean with no shores. A place of entanglement. A sea named for seaweed whose mass beneath the surface enormously exceeds what is visible above. This is the film's central image: what appears on the surface is always the smaller part of what exists.</li>
+    </ul>
+    <div class="script-note"><p><strong>From the script:</strong> Scene 2 descends below the Sargasso surface to find "a much greater, tangled mass than that which is apparent on the surface." Scene 105 ends with Antoinette flying above a sea that is now "clear and no longer filled with sargassum." The landscape is not static. It transforms with Antoinette's interiority across the film.</p></div>
+  </div>
+</div>
+
+<!-- 02 KNOWLEDGE -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">02</span>
+    <h2 class="section-title">Knowledge / <em>Power / Who Knows</em></h2>
+    <span class="section-sub">The connective tissue beneath everything. Whose knowledge counts and why.</span>
+  </div>
+  <div class="section-body">
+    <p>There is a consistent argument running beneath this entire script about knowledge and who is permitted to possess it. Antoinette knows things. Christophine knows things. The land knows things. The ancestors speak in Arawakan before the film begins in any European language. Rochester arrives with law books and a framework for understanding the world and the film systematically dismantles that framework while demonstrating that other forms of knowing were operating all along. Knowledge is in lockstep with freedom and power. Who gets to know, and whose knowing is recognised as knowledge, is this film's deepest political question.</p>
+    <p>This applies across registers: intellectual knowledge, spiritual knowledge, ancestral knowledge, material knowledge, emotional knowledge, bodily knowledge. The body that has lived in this landscape knows things the mind cannot articulate. Christophine's hands know things that Rochester's law books cannot accommodate. Antoinette's so-called madness is a form of perception that exceeds the diagnostic category applied to it.</p>
+    <ul class="threads">
+      <li>Glissant's concept of Opacity as a right. The refusal of total legibility. The insistence that not everything must be explained or made transparent to the coloniser's gaze. Antoinette's opacity is not pathology. It is a political position.</li>
+      <li>Sylvia Wynter on the colonial construction of the Human and who is placed outside it. What forms of knowledge become possible from outside that category. What is seen from the margin that cannot be seen from the centre.</li>
+      <li>The relationship between Obeah and knowledge. Christophine's practice is not superstition. It is a system of knowledge developed under conditions of extreme violence and preserved across generations. The colonial state criminalised it not because it was false but because it was effective and it was theirs.</li>
+      <li>Ancestral knowledge as a distinct epistemological category, moving in both temporal directions. What it means to know something because those who came before knew it. What it means to make something now that becomes ancestral knowledge for those who come after.</li>
+      <li>Saidiya Hartman's wake work and Tina Campt's listening to images as two methodologies for recovering forms of knowledge that were never permitted to be archived in their original form.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 03 FREEDOM -->
+<div class="section-freedom section">
+  <div class="section-header">
+    <span class="section-number">03</span>
+    <h2 class="section-title">Freedom / <em>Liberation</em></h2>
+    <span class="section-sub">The through line. The taking of it, the surfacing of it, the irresistibility.</span>
+  </div>
+  <div class="section-body">
+    <div class="epigraph">
+      <p>The aim is to make the revolution irresistible.<span class="attr">Toni Cade Bambara</span></p>
+    </div>
+    <p>This film is, at its core, about freedom. The taking of it. The losing of it. The forms of it that surface sideways through bodies that cannot otherwise express it. The freedoms that look like freedom and are not, and the freedoms that do not look like freedom but are. The film ends with Antoinette airborne above a clear sea, laughing. The fire she sets at Thornfield is not destruction. It is the irresistible. There is pleasure in that burning. There is release. There is beauty.</p>
+    <p>Freedom moves through this film in many forms and across many bodies. Christophine has it and carries it visibly, riding through the forest soaked to the skin, regal and free. The maroons have it as a precarious, won, defended thing. Tacky's Rebellion and Nanny of the Maroons hold it as historical inheritance. Antoinette gains it slowly and then suddenly. The Atlantians rising from the sea hold a freedom that has had to become something else entirely to survive. The Arawak ancestors held a different kind of freedom that was destroyed and whose traces remain in the language and the rain.</p>
+    <p>Freedom also moves through bodies that cannot fully claim it. Rochester is the most interesting case. His subconscious knows he could be free. His body knows it. There are moments when his being almost catches up with that knowing: when he and Antoinette first experience nature together, when they make love at Granbois, the strange moment when he twerks alone in the Master of None scene. These are freedoms surfacing sideways through a man whose conscious mind is still acquiescing to the demands of empire. His body searches for liberation in undercover ways. The arms of colonialism are heavy and they pull him back. Antoinette herself represents his true inherent freedom, and he is tragically at odds with her because being with her would mean leaving the structure that made him.</p>
+    <p>Research the many shapes freedom takes in this film and the many forms it took historically in the Caribbean. The visible and the buried. The direct and the sideways. The collective and the singular. The freedom that is taken and the freedom that is offered.</p>
+    <ul class="threads">
+      <li><strong>Tacky's Rebellion (1760):</strong> The largest slave uprising in 18th century Jamaica, led by Tacky, an Akan chief. It shook British colonial confidence and resulted in mass executions and deportations. The script calls for archive footage of this event directly. Research what that archive actually looks like. What was recorded, what was suppressed in the recording, what images survived and in whose custody.</li>
+      <li><strong>Nanny of the Maroons:</strong> Windward Maroon leader, warrior, Obeah practitioner, national hero. She held off the British military for years in the Blue Mountains. The script places her in direct visual succession with Tacky, appearing in the moments before Antoinette burns Thornfield. Think about what that montage is doing and what those two figures together mean.</li>
+      <li>The quieter, less monumental histories of resistance and survival. Everyday refusal, slowdown, feigned illness, crop sabotage, the preservation of knowledge across generations. Godfrey refuses to bring the carriage during the Coulibri fire and watches the house burn with a machete in one hand and a Bible in the other. That is not compliance or betrayal. It is a complex negotiation worth understanding on its own terms.</li>
+      <li>Maroon communities in Jamaica as experiments in actually existing freedom. The treaties, the compromises, the negotiations, and the cost of those negotiations. What freedom looked like when it was practiced rather than dreamed.</li>
+      <li>Freedom that surfaces sideways through bodies. Rochester's twerk in the Master of None scene. His and Antoinette's lovemaking at Granbois as a momentary crossing into something his conscious mind cannot accommodate. The moments where his true self briefly breaks through the colonial structure. Bodies finding ways to express what minds have been trained to refuse.</li>
+      <li>Drexciya. The mythic underwater civilization of the drowned who developed gills and survived. A science fiction of adaptation, transformation, and freedom through becoming something new. The script's Atlantians rising from the sea in Scene 62 carry this lineage.</li>
+      <li>The Haitian Revolution as the only successful large-scale slave revolution in history. Its imagery, its documents, its music, its suppression by European and American powers.</li>
+      <li>James Baldwin on rage and liberation. "To be relatively conscious is to be in rage almost all the time." The script quotes this directly in Scene 100. Research Baldwin's wider thinking about fire and transformation as political and spiritual acts.</li>
+      <li>Patrice Lumumba and the 2Pac 1994 MTV interview. Both appear in the script's archive montage. Research these as specific images, specific voices, and specific freedoms that were taken or refused.</li>
+      <li>Objects and ephemera of liberation. Not symbolic objects but actual material culture from acts of freedom. What people carried, what they burned, what they kept, what they made in the space of newly claimed freedom.</li>
+      <li>Christophine's freedom. The most complete and self-possessed expression of liberation in the film. She is from Martinique. She owns herself. She rides into the forest at the end of the film soaked and regal. Her freedom is not granted, not contested, not in question. Research the historical and spiritual roots of that kind of selfhood under those conditions.</li>
+    </ul>
+    <div class="script-note"><p><strong>From the script:</strong> Scenes 99 through 105 are the film's central statement. Archive footage of rebellion intercut with Antoinette burning Thornfield intercut with childhood memory. Then the jump. Then flight above a clear sea. Then the flamboyant tree. Then the laugh. This is not a tragedy. This is a liberation.</p></div>
+  </div>
+</div>
+
+<!-- 04 POSSESSION -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">04</span>
+    <h2 class="section-title">Possession / <em>The Name / The Body / The Empire</em></h2>
+    <span class="section-sub">What is taken, what is entered, what is occupied. The inverse of freedom.</span>
+  </div>
+  <div class="section-body">
+    <p>Possession is freedom's twin and its antagonist. Everything in this film is in tension between these two poles. If freedom is Antoinette airborne above a clear sea, possession is Rochester naming her Bertha. If freedom is Christophine riding into the forest regal and soaked, possession is the Obeah Act and the magistrate who takes the money. If freedom is the Atlantians rising from the sea with second eyes opening on their closed eyelids, possession is the colonial archive that recorded them as cargo.</p>
+    <p>Possession in this film operates on all three registers simultaneously, and what makes it so rich as a research territory is that on each register it means something completely different.</p>
+    <p>At the <strong>material</strong> register, possession is legal and economic. Rochester possesses Antoinette through Coverture. He possesses the estate. He possesses the name. He tries to possess Christophine's right to be in the house. Empire possesses the land, the labour, the bodies, the future. This is the most visible form of possession in the film and it is relentless.</p>
+    <p>At the <strong>spiritual</strong> register, possession is something else entirely. In Vodou and related spiritual traditions, possession by the Loa is not a theft of self but a form of visitation, of alignment, of being chosen as a vessel for something larger. The Loa rides the person the way a rider rides a horse. This is not violence. It is a relationship with the ancestral world that the coloniser's framework cannot accommodate and therefore calls madness, or witchcraft, or both. Christophine's practice lives in this register. Antoinette's expanded perception lives here too.</p>
+    <p>At the <strong>ancestral</strong> register, possession is the most complex. Empire as a possessing force that inhabits its own agents. Rochester possessed by the structure that made him, carrying it into the Caribbean against his own deepest interests. His subconscious reaching for liberation while his conscious mind is occupied. He is, in a precise sense, haunted by empire in the same way that Vodou theology would say a person is ridden by a Loa they did not choose and cannot easily refuse.</p>
+    <ul class="threads">
+      <li><strong>The naming of Bertha.</strong> Rochester's renaming of Antoinette is one of the most precise acts of possession in the script. To rename someone is to claim them. To replace their name with yours is to make them an extension of your identity rather than the holder of their own. Research the history of colonial renaming, of enslaved people stripped of African names and given European ones, and how this act of possession persists in the language of the Caribbean to this day.</li>
+      <li><strong>Coverture and the legal possession of women.</strong> The legal architecture through which Rochester possesses Antoinette. Not just her body but her property, her legal identity, her name, her future. Marriage as a mechanism of total possession under English law in the 19th century. What it meant in the Caribbean colonial context specifically.</li>
+      <li><strong>Spiritual possession in Vodou, Candomblé, and related traditions.</strong> The Loa, the orixá, the spirits who ride the living. The theology of possession as visitation rather than invasion. What this form of possession offers that the colonial form destroys. Maya Deren's documentation of Vodou possession in Haiti as primary visual and written source.</li>
+      <li><strong>Antoinette's name as a site of possession.</strong> Called Antoinette by those who know and love her. Called Bertha by Rochester as an act of possession and erasure. Called "mad" by Daniel as a way of making her possessable by the psychiatric system. The name is the battleground. Research the politics of naming in colonial and post-colonial Caribbean contexts.</li>
+      <li><strong>Empire as a possessing force inhabiting its own agents.</strong> Rochester is not simply a possessor. He is also possessed. The structure of empire enters him, occupies his consciousness, makes demands of his body (the corset, the neck scarf, the formality in tropical heat), and requires him to refuse what his body and subconscious are reaching toward. Research what colonialism does to the coloniser's psyche. Fanon's Black Skin, White Masks addresses this but the literature goes further.</li>
+      <li><strong>The possessed landscape.</strong> Colonial land possession as an act of spiritual as well as legal violence. The plantation as an occupied space that was not empty before it was claimed. The land that carries the memory of possession in its very soil. The forest that refuses Rochester. Bachelard on space as possessable and on the spaces that resist being possessed.</li>
+      <li><strong>Possession and the archive.</strong> Colonial archives as instruments of possession. To document is to claim. To classify is to possess. What it meant for the colonial state to build archives of its territories, its flora, its enslaved population, its indigenous peoples. And what it means now to move through those archives as a researcher.</li>
+      <li><strong>Possession and the body.</strong> The enslaved body as legally possessed property. The colonised body as possessable space. The woman's body under Coverture as legally belonging to her husband. And the forms of possession that resist all of this: Christophine's body moving slowly and deliberately through every room she enters as if she is the one who decides where she goes and when. Antoinette's body at the end of the film, airborne, belonging to no one.</li>
+    </ul>
+    <div class="script-note"><p><strong>From the script:</strong> Scene 22, Rochester calls Antoinette "Bertha" for the first time, laughing, pulling her close: "Yes...Bertha." Scene 68, he shouts the name at the top of his voice as a form of coercion and erasure. Scene 69, Antoinette responds: "You can't turn me into someone else by calling me another name." Scene 41, Christophine whispers at the film's spiritual hinge: "She love that part of you only she see. That part that look like her." What Rochester possesses and what possesses Rochester are the same structure. Antoinette's refusal to be Bertha is the film's central act of resistance. The burning of Thornfield is the exorcism.</p></div>
+  </div>
+</div>
+
+<!-- 05 COLOUR -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">05</span>
+    <h2 class="section-title">Colour / <em>Race / Visibility / Residue</em></h2>
+    <span class="section-sub">Saturation, absence, heat, and what is left behind</span>
+  </div>
+  <div class="section-body">
+    <p>Colour is working on multiple registers in this film simultaneously. It is chromatic, it is racial, it is thermal, it is residual. The Caribbean saturates. England drains. The script calls for a "deep red" that momentarily fills the screen at the moment of Antoinette's psychological rupture. Colour in this film is not decorative. It is diagnostic.</p>
+    <p>Alongside colour, I am increasingly interested in the concept of <strong>residue</strong>. What colour leaves behind. What memory leaves behind. What spirit leaves behind. What an emotion leaves on a body, what an ancestor leaves in a place, what an indigenous presence leaves in language and rain after the people who spoke that language have been physically removed. Residue is a way of thinking about what remains when the original is gone, and how that remainder continues to act on the present. It is closely related to dub's logic of the echo, to THE MISSING (which gets its own section below), and to the indigenous thread. Worth holding as a thinking line throughout the research.</p>
+    <ul class="threads">
+      <li>The history of racial colour taxonomies in the Caribbean and their British colonial origins. The lexicon of classification (mulatto, quadroon, mustee, sambo, and the finer gradations beneath these) as an administrative violence. What it meant to be Creole in Jamaica in the mid-19th century. What it meant to be neither.</li>
+      <li>Fanon's epidermalization of inferiority in Black Skin, White Masks. The skin as the primary site of racial inscription. And then the deliberate inversion in Scene 78: Rochester digs in the forest with such force that the earth creates a black mask on his white skin. "White skin, Black mask." The coloniser wearing the face of what he came to dominate. This is one of the most precise visual arguments in the script.</li>
+      <li>Colour theory as racial theory in Western visual culture. How whiteness and blackness accumulated moral, aesthetic, and hierarchical meaning over centuries. The ideology inside the colour wheel.</li>
+      <li>Hand-coloured photographs of the Caribbean from the late 19th and early 20th century. The politics of adding colour to colonial archives. What the addition reveals about what the original suppressed. See for example <a href="https://www.antiquemapsandprints.com/products/west-indies-an-evening-party-st-thomas-jamaica-1905-old-antique-print-p-6-026334" target="_blank" rel="noopener">An Evening Party, St Thomas, Jamaica (1905)</a> and <a href="https://www.antiquemapsandprints.com/products/west-indies-arrival-of-the-royal-mail-steamer-dominica-roseau-1905-print-p-6-026336" target="_blank" rel="noopener">Arrival of the Royal Mail Steamer, Dominica, Roseau (1905)</a>.</li>
+      <li>Residue as a research line. The trace of memory in objects. The trace of an absent body in a room. The trace of a language in the place names of a colonised land. The trace of a sound in the silence after it. The trace of an emotion on a face hours after the moment passed. Research artists, writers, and thinkers who have worked with residue as a concept.</li>
+    </ul>
+    <div class="provocation-box">
+      <p class="box-label">Shades of White / A Material Provocation</p>
+      <p>The many shades of white operating across this film are a racial taxonomy made material. The bleached white of a newly washed linen dress. The sun-yellowed white of a garment dried in Caribbean heat over years. The grey-white of mildew in a humid house. The blue-white of snow at Thornfield. The chalk-white of powder on the floor after Antoinette's love potion. The bone-white of a moth's body falling onto the candle. The white of a cockroach that has crawled through powder. The white silhouette of Rochester in thermal inversion. Each of these whites is a different relationship to colonial classification, to labour, to climate, to time.</p>
+      <p>This is one example of how a theoretical idea (racial taxonomy) can be encoded into a material reality (fabric, paint, skin, light) without ever being named as such. Build out other examples of this practice as you research. The method is the point. Encoding theory into matter is one of the central principles of how this film is being made.</p>
+    </div>
+    <div class="script-note"><p><strong>From the script:</strong> Antoinette's white dress trails in brown mud, Scene 6. Christophine's dress hem is "dirty brown at the bottom," Scene 11. A cockroach crawls through white powder and becomes "almost entirely white," Scene 64. The attic window is "packed with snow and ice. A white square, nothing beyond," Scene 98. Colour and its removal are tracked obsessively across this whole script.</p></div>
+  </div>
+</div>
+
+<!-- 06 THE MISSING -->
+<div class="section-missing section">
+  <div class="section-header">
+    <span class="section-number">06</span>
+    <h2 class="section-title">THE MISSING / <em>Disappearance / Frequency</em></h2>
+    <span class="section-sub">What cannot be measured. What vanishes. What vibrates in the gap.</span>
+  </div>
+  <div class="section-body">
+    <p>Arthur Jafa's concept of THE MISSING is central to this film. What we cannot mourn because we do not know its dimensions. What we do not know we have lost because we do not know what we had. The unregistered. The unquantifiable. This is not a vague abstraction. It is a precise philosophical and aesthetic territory that the film inhabits at multiple levels: thermally, sonically, materially, ancestrally. THE MISSING has been a through line in my own practice for some time. You can find an early articulation of it in my 2019 film <a href="https://youtu.be/WqVq_QMH46E?si=KyHizT27xe-Aaft6" target="_blank" rel="noopener">Black to Techno</a>, where the concept was first explicitly engaged as a structural and philosophical framework.</p>
+    <p>The film makes THE MISSING visible, and audible, and felt, in specific ways. It does this twice through thermal logic at two structurally significant moments. The first: in the moments following Rochester's departure from Daniel's house, the screen oversaturates as if shot on thermal camera until Rochester becomes a white silhouette surrounded by black, then disappears into white entirely. Rochester being seen through the camera that bypasses the visible spectrum, stripped of the visual grammar of colonial authority. The second: at the Thornfield battlements in the final act, Antoinette can make out the shape of Rochester inside the fire but nothing more. The screen saturates again. Rochester becomes a white silhouette against a darker background. Slowly the darker background turns to white, swallowing him. He disappears. He is calling for Bertha at the moment he ceases to be visible. The possessor vanishing at the moment the thing he tried to possess becomes free. Two thermal disappearances. Two different arguments about who gets to remain.</p>
+    <p>Beyond the thermal: Antoinette's mother is described as having "two deaths, the real one and the one people know about." The ruined house in the forest that Rochester finds and then loses again is there and not there. The Atlantians have eyes on their eyelids that open under closed eyes. Dub's central technique, the cut, makes a presence by removing it. The Arawak ancestors are gone and their voices speak.</p>
+    <ul class="threads">
+      <li><strong>Arthur Jafa, THE MISSING.</strong> The unregistered, the unquantifiable. What cannot be mourned because we do not know its dimensions. Research where Jafa has written and spoken about this concept. How it operates across his work. Its application here is not metaphorical. See also <a href="https://youtu.be/WqVq_QMH46E?si=KyHizT27xe-Aaft6" target="_blank" rel="noopener">Black to Techno (Jenn Nkiru, 2019)</a> for its continuation as a creative and philosophical framework.</li>
+      <li><strong>Thermal as a double disappearance.</strong> Two moments where the thermal camera makes Rochester vanish into white. The first is in Scene 37, following his departure from Daniel's house, where the screen oversaturates until he becomes a white silhouette surrounded by black, then disappears entirely. The second is Scene 103, at the Thornfield battlements in the final act, where Antoinette can make out his shape inside the fire but nothing more, the screen saturates again, he becomes a white silhouette against a darkening background, and as the background slowly turns to white it swallows him. He is calling for Bertha as he vanishes. Bodies seen by a camera that does not see in the visible spectrum. Bodies that vanish into oversaturation. The thermal is not a special effect. It is a philosophical argument about visibility, race, and who is permitted to remain.<span class="tag tag-thermal">Thermal</span></li>
+      <li><strong>Heat as a vanishing.</strong> The Caribbean midday that bleaches the world. The sun that burns away detail. The fever Rochester carries that distorts what he sees. Heat as a form of erasure as well as presence.</li>
+      <li><strong>Dub and the cut.</strong> The removal of the lead element to expose the space beneath. Echo as the trace of what was present and is no longer. The delay pedal as a machine for making the past haunt the present. Dub as the sonic enactment of THE MISSING.</li>
+      <li><strong>Frequencies and frequential alignment.</strong> What happens to the body when there is unison between the frequency of the sound and the frequency of the spirit. When two registers vibrate on the same frequency. The conditions under which the visible and the invisible align and an experience becomes possible that ordinarily cannot be.</li>
+      <li><strong>Residue as the form of THE MISSING.</strong> What remains when the original is gone. The mark on the wall after the painting is removed. The smell in the room after the body has left. The Arawakan word that sits inside the Jamaican place name. The grief that arrives years after the loss because the original moment was too large to feel.</li>
+      <li><strong>The void in colonial archives.</strong> The pages that were never written. The names that were never recorded. The countless lives of the Middle Passage that were not counted because counting them would have made them visible as people. Saidiya Hartman's <em><a href="https://www.dukeupress.edu/scenes-of-subjection" target="_blank" rel="noopener">Scenes of Subjection</a></em> (1997) and <em><a href="https://www.dukeupress.edu/lose-your-mother" target="_blank" rel="noopener">Lose Your Mother</a></em> (2007) on the impossibility of recovering what was deliberately not preserved.</li>
+      <li><strong>The Sargasso Sea as a figure of THE MISSING.</strong> The ocean named for what floats on top, while the entanglement beneath the surface is enormously larger. What we name versus what is actually there. The film's central image is precisely this distinction.</li>
+      <li><strong>Cosmic Archaeology.</strong> A concept developed across my practice. The excavation of what was buried, suppressed, or cosmically displaced by colonial and historical violence, and the discovery that it is still active, still transmitting, still generative. Where standard archaeology unearths the material past, Cosmic Archaeology reaches for what was removed from the visible record and finds it operating at a different frequency. Crucially, Cosmic Archaeology also deals with connecting the disparate links across the pan-human and by virtue pan-African experience: using the fragments left behind to attempt to fill in for THE MISSING. The partial, the residual, the trace, assembled not into a complete picture but into a form of knowing that is more honest than false completeness. It also speaks to fragments of past, current, and future knowledge finding a meeting point in lived experience, a form of déjà vu that opens up spiritual and resonant pathways in the mind and spirit simultaneously. That sense of recognition without prior encounter, of knowing something that was never formally taught, of the body arriving at a frequency before the mind has language for it. Cosmic Archaeology is code-breaking in this sense: it is the practice of finding the cipher between what was erased and what remains, and using that cipher to decode what the dominant record insists was lost. It connects to Obeah's relationship to ancestral knowledge, to the indigenous presence section, to the residue thread, and to the Afrofuturist notion that time is not linear but layered. Research artists, cosmologists, and thinkers whose work touches this idea from unexpected directions.</li>
+      <li><strong>Vusamazulu Credo Mutwa.</strong> South African Zulu sanusi, storyteller, healer, and keeper of indigenous African cosmological knowledge. His works, particularly <em>Indaba My Children</em> and <em>Africa Is My Witness</em>, are vast repositories of pan-African cosmological thinking, spiritual systems, mythic genealogies, and the kind of ancestral knowledge that colonial modernity worked systematically to erase or ridicule. He is one of the most radical and underread thinkers for this project. His work sits precisely at the intersection of Cosmic Archaeology, Afro-Surrealism, and the ancestral register in its fullest sense: the use of fragments left behind to fill in for THE MISSING, to reconstruct from residue what was deliberately unmapped. He is also a figure who was dismissed and caricatured by colonial and post-colonial institutions precisely because what he knew could not be accommodated within their epistemological frameworks. That dismissal is itself a form of THE MISSING.</li>
+      <li><strong>Afro-Surrealism.</strong> Where Afrofuturism looks outward and forward, Afro-Surrealism excavates the interior, the dream state, the irrational as a form of truth-telling. The surreal as a register of Black experience that colonial realism cannot accommodate. Antoinette's so-called madness is an Afro-Surrealist space. The Atlantians rising from the sea. The forest that swallows a road. The ruined house that appears and vanishes. The girl in the white dress who screams and runs. These are not departures from reality. They are another register of it. Research the Afro-Surrealist tradition in literature, visual art, and film: Ted Joans, Jayne Cortez, the Afro-Surrealist Collective, Eugene Redmond, Wangechi Mutu, Kara Walker at her most interior.</li>
+      <li><strong>Afrofuturism.</strong> Drexciya, Sun Ra, Kodwo Eshun's <em>More Brilliant Than the Sun</em>, the Underground Resistance collective, Janelle Monáe, Parliament-Funkadelic. The sonic and visual tradition that already knows time is not linear. The ancestral as reaching toward the future as well as back into the past. The script's Atlantians carry this lineage directly. The archive sequences in Scenes 99 through 101 collapse centuries into one temporal moment. Afrofuturism is the philosophical framework that makes that temporal collapse not anachronism but argument.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 07 OBEAH -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">07</span>
+    <h2 class="section-title">Obeah / <em>Spiritual Systems</em></h2>
+    <span class="section-sub">Knowledge, resistance, and the criminalization of power</span>
+  </div>
+  <div class="section-body">
+    <p>These are not superstitions. They are sophisticated systems of knowledge, relation, and resistance, developed under conditions of extreme violence and criminalized by colonial law precisely because of the threat they posed. Christophine is an Obeah practitioner. Her knowledge heals, protects, and disrupts colonial order. Daniel calls her dangerous. Rochester tries to have her arrested. The magistrate takes the money. The system responds to her power with its full legal apparatus. That is not coincidence.</p>
+    <ul class="threads">
+      <li>Obeah in Jamaica. Its history, practice, and criminalization under the British Obeah Act. What the Act reveals about what colonial power actually feared. Obeah as a practice that refused to be fully surveilled, classified, or contained.</li>
+      <li>Obeah as resistance technology. Its role in maroon communities, in planned rebellions, in the preservation of African spiritual knowledge across the catastrophe of the Middle Passage and into the post-emancipation period. See <a href="https://www.newbeaconbooks.com/caribbean-non-fiction/folk-culture-of-the-slaves-in-jamaica" target="_blank" rel="noopener">Edward Brathwaite's Folk Culture of the Slaves in Jamaica</a> as a starting point.</li>
+      <li>The female practitioner specifically. The mambo, the Myal woman. What their authority represents in a context of patriarchal and colonial domination simultaneously.</li>
+      <li>The material culture of Obeah practice. Plants, substances, vessels, assemblages. The large African mortar in Christophine's kitchen, the calabash of blood-red pulp, the tincture she rubs into Antoinette's cut. These objects have genealogies worth tracing across all three registers.</li>
+      <li><strong>Taíno zemis, sacred objects, and ancestor figures.</strong> The indigenous spiritual material culture that pre-existed Obeah and Vodou and that fed into them. Zemis as objects through which the living communicate with the dead, with spirits of place, with ancestors. The continuity and the rupture between Taíno spiritual practice and what arrived from Africa.</li>
+      <li>Vodou in the Haitian and Francophone Caribbean tradition. The Loa, possession, the relationship between the living and the ancestral dead. Christophine's practice has Francophone roots alongside Jamaican ones. That geographic crossing matters.</li>
+      <li>Comparative study across Obeah, Vodou, Candomblé, Santería. Divergent traditions from shared African roots, shaped differently by British, French, and Portuguese colonial contexts. The differences matter as much as the continuities.</li>
+      <li>Haitian Vodou flags, the drapo Vodou. Sequined devotional objects of extraordinary visual and material complexity. Not illustrative. Presences.</li>
+      <li>Katherine Dunham's anthropological and artistic work in Caribbean spiritual practice. Zora Neale Hurston's Tell My Horse. Maya Deren's Divine Horsemen: The Living Gods of Haiti. Research from inside rather than from above.</li>
+      <li>The sync between sound and spirit. The sonic dimension of Obeah and Vodou practice. Rhythm as a technology of spiritual contact. What happens to the body when there is frequential alignment between sound and spirit, when the two vibrate on the same frequency.</li>
+    </ul>
+    <div class="script-note"><p><strong>From the script:</strong> Christophine hands Rochester black coffee and says "Taste my bull's blood," Scene 11. She speaks-sings while working the mortar, Scene 26. She disappears momentarily mid-sentence in Scene 40 and reappears. She traces circles on Antoinette's hands as a gesture of protection and healing in multiple scenes. Her presence is not metaphorical. It is literal power operating on all three registers.</p></div>
+  </div>
+</div>
+
+<!-- 08 SONICS -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">08</span>
+    <h2 class="section-title">Sonics / <em>Dub</em></h2>
+    <span class="section-sub">Sound as structure, vibration, echo, and the architecture of what remains</span>
+  </div>
+  <div class="section-body">
+    <p>Sound is not illustrative in this film. It is structural. The script is explicit: dub baselines punctuate chapter title cards. A "deep heavy baseline, dub vibration" moves through the pool water in Scene 21. A "long dub bassline drop" follows the love potion in Scene 61. Christophine submerges in the river and screams underwater "like whale song" above a King Tubby deep dub in Scene 76. Dub is this film's nervous system.</p>
+    <p>Dub operates on all three registers simultaneously. At the material level: bass, echo, reverb, the physical architecture of the sound. At the spiritual level: the sync between frequency and spirit, the way certain bass frequencies arrive in the body before the mind can process them. At the ancestral level: dub as a practice of making something from what remains after what was taken, of building presence from absence, of carrying forward what cannot be named. <a href="https://morleyradio.co.uk/programmes/the-strangeness-of-dub-ep1/" target="_blank" rel="noopener">The Strangeness of Dub</a> on Morley Radio is a useful entry point.</p>
+    <ul class="threads">
+      <li>Dub as philosophy and compositional method. King Tubby, Lee "Scratch" Perry, Augustus Pablo, Prince Jammy. The studio as instrument. The cut as presence. The version as a form of reinterpretation that preserves the original's ghost while transforming everything around it.</li>
+      <li>The bass frequency as a specifically physical phenomenon. Felt before heard. Moving through bodies, through walls, through water.</li>
+      <li>The in-between as dub's philosophical territory. The space between source and sample. Between material and spirit. Between earth and whatever is beyond it. Between what was recorded and what was felt. Dub lives in all these in-betweens simultaneously.</li>
+      <li>Michael Veal's Dub: Soundscapes and Shattered Songs in Jamaican Reggae. Essential grounding.</li>
+      <li>Dub as architecture. How do you turn dub into a spatial structure? What would a room built on dub's logic look and feel like? The echo as a dimension of space. The bass as a foundation. The cut as a doorway.</li>
+      <li>The acoustic ecology of the Caribbean. Wind, water, insects, birds. The hum of insects on the veranda in Scene 9. The bird that answers Antoinette's call in Scene 16.</li>
+      <li>Silence as a sonic element. What dub withholds. In Scene 58, when Tia throws the stone, "all sound is sucked from the scene, a vacuous, dead tone."</li>
+      <li>Jamaica as a specific sonic site beyond dub. Reggae, mento, nyahbinghi drumming, kumina, revival Zion. The deep sonic landscape of Jamaica that dub emerged from and that the film's world is soaked in.</li>
+    </ul>
+    <div class="script-note"><p><strong>From the script:</strong> The opening chapter title card: "a searing dub baseline." Second chapter title: "a dub delay and reverb." Scene 61: "a dub hi-hat echo that cuts out as fast as it cuts in," then "a long dub bassline drop." Scene 76: Christophine underwater above "King Tubby deep dub." Scene 85: "a dub baseline gets heavier as she rides." Dub marks every major transition and every moment of heightened spiritual or psychological register.</p>
+    <p><strong>From the script, Scene 39:</strong> Antoinette comes through the woods toward a group of women washing white linen in the river. Christophine leads them in a work song, described as "a rich harmony in their body, voice and spirit." As Antoinette approaches, "the rhythmic sound of water drumming" builds. Water here becomes a percussion instrument. The river is a sound system. The communal labour of Black women is also a sonic and spiritual technology, connecting to dub's foundations in rhythm and in bodies producing music from whatever the immediate environment offers. The white linen they wash connects to the colour and possession threads simultaneously. This scene is doing more work than it appears to be doing.</p></div>
+  </div>
+</div>
+
+<!-- 09 TIME HISTORY -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">09</span>
+    <h2 class="section-title">Time / History / <em>Resistance</em></h2>
+    <span class="section-sub">Post-emancipation, colonial residue, and what survived in secret</span>
+  </div>
+  <div class="section-body">
+    <p>The film is set in the aftermath of the Emancipation Act but the script makes clear this is a legal fiction. "These new ones have letter of law instead of chains," Christophine says in Scene 49. "They got magistrate and fines instead of lashings. New ones same as the old ones, more cunning, that's all." The architecture of slavery persists in its social, spatial, and psychological forms. The film is not only about that period. It is about the continuous present that period created.</p>
+    <ul class="threads">
+      <li>Post-emancipation Jamaica. The "apprenticeship" system. The persistence of plantation economics. The Morant Bay uprising of 1865 and what it revealed about the limits of legal freedom.</li>
+      <li>The Creole subject in post-emancipation Caribbean society. Belonging to neither the coloniser's category nor the formerly enslaved. The specific social violence of that permanent in-betweenness.</li>
+      <li>C.L.R. James, The Black Jacobins. The Haitian Revolution and its reverberations across the Caribbean. The first Black republic won in blood and then systematically punished for its existence.</li>
+      <li>Saidiya Hartman, Lose Your Mother and Scenes of Subjection. The afterlife of slavery in everyday life and subjectivity.</li>
+      <li>The collapse of time the film is actively performing. Past, present, and future are not sequential here. They are simultaneous. The archive footage in Scenes 99 through 101 places Tacky's Rebellion alongside the Haitian Revolution alongside Patrice Lumumba alongside 2Pac 1994 alongside Antoinette burning Thornfield. Expressions of the same continuous fact about power and its refusal.</li>
+    </ul>
+    <div class="script-note"><p><strong>From the script:</strong> Scene 86, Rochester alone at dinner, rehearsing colonial logic out loud: "After The Emancipation Act, the British government only awarded owners a compensation rate of £19 per slave." Delivered as dinner conversation among imaginary guests. The obscene as the social. The film's political argument in miniature.</p></div>
+  </div>
+</div>
+
+<!-- 10 INDIGENOUS -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">10</span>
+    <h2 class="section-title">Indigenous Presence / <em>What Remains</em></h2>
+    <span class="section-sub">Before the plantation. Before the colonial encounter. Before the category of Caribbean itself.</span>
+  </div>
+  <div class="section-body">
+    <p>The script contains a scene that stops everything. Scene 87. Black screen, silence. We hear a language we do not recognise. Then, subtitled: "Our rain knows all the songs. And all the tears. Listen." The language is Arawakan. The voice is an Ancestor. This is the film's deepest temporal register. Before the plantation, before the colonial encounter, before the category of Caribbean itself, there were people whose relationship to this land was of a completely different order. The film gives them the last word before the final movement begins.</p>
+    <ul class="threads">
+      <li>Taíno and Arawak presence in Jamaica and the wider Caribbean. Their cosmology, material culture, place names, agricultural practices, and the specific genocide that erased their physical presence while leaving traces in the land and language that persist.</li>
+      <li>What the Arawakan language actually sounds like. What survives of it. What linguistic traces are embedded in Jamaican place names and Caribbean vernacular that people speak every day without knowing their origin.</li>
+      <li>Taíno zemis, sacred objects, and ancestor figures. What they looked like, what they were made from, where they have ended up. Research them as objects operating on all three registers.</li>
+      <li>Taíno iconography, petroglyphs, and cave art found in Jamaica and across the Caribbean. Images made before the European encounter, now largely held in institutions far from where they were made.</li>
+      <li>The meeting points between indigenous Caribbean spiritual practice and the practices that arrived from Africa. What Obeah and Vodou absorbed from what was already there. The palimpsest of spiritual knowledge on this land.</li>
+      <li>Indigenous residue. The traces in language, in place names, in agricultural practice, in the bodies of contemporary Caribbean people who carry Taíno DNA they may not know about. Connect this to the residue thread in the colour section.</li>
+      <li><strong>Cosmic Archaeology as a framework for reading indigenous traces.</strong> The excavation not just of material remains but of what was removed from the visible record and continues to transmit at a different frequency. The Arawakan language that sits inside Jamaican place names. The spiritual practices that fed into Obeah and Vodou without being named. The rain that knows all the songs. What Cosmic Archaeology makes possible is the recognition that erasure is never total. Something always remains, active and transmitting, waiting to be heard.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 11 ADAPTATION -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">11</span>
+    <h2 class="section-title">Adaptation / <em>Mal-Adaptation / The Remix Potential</em></h2>
+    <span class="section-sub">How stories fracture, resist, and refuse translation across time and consciousness</span>
+  </div>
+  <div class="section-body">
+    <p>The relationship to Rhys's novel is context and backstory, not the film's living argument. This film uses the novel as a jumping-off point for something that has its own velocity, its own contemporary urgency, its own visual and sonic language. The deeper research question is not how this film adapts a book. It is what it means to take a received form, a received story, a received history, and push it past its own logic. Mal-adaptation as a creative methodology. The refusal to translate cleanly as an artistic position.</p>
+    <ul class="threads">
+      <li>Aimé Césaire's Une Tempête as a model. Taking Shakespeare's The Tempest and rewriting it from Caliban's perspective. What it means to take a canonical text and make it account for what it erased.</li>
+      <li>Caribbean writers taking back European canonical forms. Walcott's Omeros, Condé's I, Tituba, Black Witch of Salem, Danticat's engagements with Haitian history and its distortions.</li>
+      <li><strong>The remix potential of space.</strong> A term I have been working with across my practice, drawn from architectural thinking but functioning as a wider framework. The remix as a form of mal-adaptation that preserves the source material's traces while transforming everything around it. Not just music: film, visual art, literature, architecture, the built environment. Dub as the sonic enactment of this logic. Sampling culture as its wider expression. The remix potential of space is about what a place can become when its received use is refused and its underlying material is reactivated. This film is, in many ways, a remix of the architecture of Wide Sargasso Sea, of the architecture of Jane Eyre, of the architecture of empire itself. Research artists, architects, and thinkers working with this kind of recombinant logic.</li>
+      <li>What the contemporary lens specifically demands. How the post-emancipation story resonates with present-day structures of racial capitalism, displacement, and the ongoing administration of Black life and land. The film is not using history as allegory. It is arguing that this history is not past.</li>
+      <li>The achronological approach as a formal argument. Sound that crosses decades. References that collapse time. A visual language drawn from multiple periods simultaneously. Not anachronism for its own sake. A position about the nature of time in communities shaped by colonial violence.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 12 THEORY -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">12</span>
+    <h2 class="section-title">Theory / <em>Frameworks</em></h2>
+    <span class="section-sub">A constellation. Research each voice on their own terms before looking for the connections.</span>
+  </div>
+  <div class="section-body">
+    <p>Research each thinker first on their own terms. The connections will be more useful if they are earned rather than assumed.</p>
+    <ul class="threads">
+      <li><strong>Aimé Césaire and Négritude:</strong> The reclamation of Blackness as creative, philosophical, and political force. Notebook of a Return to the Native Land.</li>
+      <li><strong>Édouard Glissant:</strong> Creolisation, the Poetics of Relation, Opacity as a right, the Abyss as founding rupture and source. Antoinette's opacity is a Glissantian position.</li>
+      <li><strong>Frantz Fanon:</strong> Black Skin, White Masks. The Wretched of the Earth. The inversion in Scene 78: Rochester's white skin masked in black earth.</li>
+      <li><strong>Sylvia Wynter:</strong> The colonial construction of the Human and who is placed outside it.</li>
+      <li><strong>Stuart Hall:</strong> Cultural identity as produced in enunciation. Caribbean cultural identity and diaspora.</li>
+      <li><strong>Christina Sharpe:</strong> In the Wake. Wake work as a practice of mourning, maintenance, and witness.</li>
+      <li><strong>Saidiya Hartman:</strong> Critical fabulation. <em>Scenes of Subjection</em> (1997). <em>Lose Your Mother</em> (2007). <em>Wayward Lives, Beautiful Experiments</em> (2019). The afterlife of slavery.</li>
+      <li><strong>Tina Campt:</strong> Listening to images. Reading vernacular and archival photographs against the grain.</li>
+      <li><strong>W.E.B. Du Bois:</strong> Double Consciousness, addressed in detail in the next section.</li>
+      <li><strong>Fred Moten:</strong> In the Break. The undercommons. Fugitivity. Black life as exceeding the categories imposed upon it.</li>
+    </ul>
+    <div class="script-note"><p><strong>From the script:</strong> Scene 100 calls for archive footage of "Fanon's Black Skin White Masks article: Man's mask eyes," "Double Consciousness WEB DuBois," "Drexciya," and "James Baldwin quote." The theory is not subtext. It will literally appear on screen.</p></div>
+  </div>
+</div>
+
+<!-- 13 GENDER MADNESS -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">13</span>
+    <h2 class="section-title">Gender / Psychology / <em>Madness as Access / Double Consciousness</em></h2>
+    <span class="section-sub">Power, perception, the pathology of knowing, and freedom that surfaces sideways</span>
+  </div>
+  <div class="section-body">
+    <p>The film's central proposition, held by Christophine in Scene 75: "You just always saw more than she wanted you to." This is what the film means by madness. Not a departure from reality. An arrival at a reality too large, too clear, too uncompromising for the social structures around it to hold. Antoinette is not broken. She sees too much.</p>
+    <p>Alongside madness sits Du Bois's concept of <strong>Double Consciousness</strong>: the sense of always looking at oneself through the eyes of another. Of being two selves at once because the dominant gaze refuses to see you whole. Antoinette experiences this from multiple directions. She is white but not white enough, Creole but legible to neither the British nor the formerly enslaved. Her madness is the pathology of knowing too much in a world that requires her to know less. It is the sickness of seeing what cannot be unseen. Double Consciousness, in Antoinette's case, is not only racial. It is the experience of being constituted by competing gazes that refuse to allow her a single integrated self.</p>
+    <p>Rochester carries his own form of Double Consciousness, and this is one of the most important things the film is doing with him. He is not simply a villain. He is a representation of social construction beyond his own pitfalls. Early in the film, before the weight of empire pulls him fully back, there are moments where he could plausibly walk Antoinette's path. He almost does. The arms of colonialism are heavy and they pull him back into the structure that made him. Antoinette represents his true inherent freedom, and he is tragically at odds with her because being with her would mean leaving the architecture of empire that gives him his name, his money, his standing. His subconscious knows this. His body knows this. His body keeps trying to reach freedom through undercover routes: the moments at Granbois with Antoinette in the pool and on the hammock, the lovemaking, the strange twerk in the Master of None scene. These are freedoms surfacing sideways through a man whose conscious mind cannot acknowledge what his body has already understood.</p>
+    <ul class="threads">
+      <li>The historical pathologisation of women's perception and emotional expression. Hysteria, neurasthenia, and the gendered dimensions of psychiatric diagnosis. What these categories were designed to manage.</li>
+      <li>The Coverture laws. The legal structure by which marriage transferred a woman's property, legal identity, and personhood to her husband. Rochester does not just stop loving Antoinette. He legally erases her.</li>
+      <li>The specific double bind of the Creole woman. Neither white enough nor Black enough, legible to neither world. The permanent liminality of Antoinette's social position.</li>
+      <li>Annette's arc. Not mad in any psychiatric sense. A woman who knew what was coming, said so, was ignored, and was broken by the event she predicted. Her "madness" is a response to being right in a world that punished women for knowing things.</li>
+      <li>Stanislav Grof and Christina Grof's research into non-ordinary states of consciousness. <a href="https://archive.org/details/spiritualemergen00grof/page/n9/mode/1up" target="_blank" rel="noopener">Spiritual Emergency (1989)</a>, co-edited by both, as a framework for distinguishing between breakdown and breakthrough and for understanding the systems, and the ideological positions of those systems, that cannot accommodate expanded perception as a valid form of knowing.</li>
+      <li>The figure of the woman in the attic across literature, feminist theory, and film. Gilbert and Gubar's The Madwoman in the Attic.</li>
+      <li><strong>Rochester as colonial subject.</strong> His twerk in the Master of None scene as a freedom surfacing sideways through a body that has been trained to refuse it. His corset as empire constricting the body of the man who carries it. His nervous knee shake. His inability to finish writing a letter to his father. His inability to climax alone. Bodies that cannot lie even when minds insist on lying. Research what colonialism does to its agents, not just to its victims.</li>
+      <li><strong>Double Consciousness as gendered.</strong> Du Bois's original formulation focused on race. How does the concept extend or transform when applied to gender, to colonial position, to a Creole woman who is being rewritten by every system she passes through?</li>
+    </ul>
+    <div class="script-note"><p><strong>From the script:</strong> In Scene 70, "Madness" / "Truth!" is the exchange between Rochester and Antoinette. The film's philosophical hinge. Antoinette's response is not a defence. It is a redefinition. Whose perception counts as truth is the question every scene has been building toward.</p></div>
+  </div>
+</div>
+
+<!-- 14 MATERIAL WORLD -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">14</span>
+    <h2 class="section-title">The Material World / <em>Objects, Interiors, Ephemera</em></h2>
+    <span class="section-sub">Spaces, surfaces, things. What the film can hold in its hands. And what it can burn.</span>
+  </div>
+  <div class="section-body">
+    <p>The script is precise and obsessive about objects. Rochester's law books dragged through rain. The calabash of blood-red pulp. The gold earrings on Christophine's lobes. The silk turban elaborately tied. The large African mortar. The portrait of Annette in a gilded frame. The children's learning flashcard. The male corset Rochester laces himself into in Scene 81. The knife Antoinette takes from the table. The ginger sweets from home. These things have material lives worth researching across all three registers.</p>
+    <p>Think also about what should burn at Thornfield. Scene 99 calls explicitly for archival material to appear on screen as Antoinette moves through the house with her candle. What are those documents? What would a house built on colonial wealth actually have contained? What should be in that fire?</p>
+    <ul class="threads">
+      <li>The architecture of the Caribbean great house as a building type. What it was made of, how it was organised, what it felt like to move through its rooms. How it decayed after emancipation. Coulibri is "past splendour and present dilapidation."</li>
+      <li>Bachelard's Poetics of Space. The distinction between the nest (a space that holds and protects), the lair (a space of concealment), and the corner (where the self retreats to become itself). Every significant space in this script is one of these or transforms from one into another. Granbois begins as a nest and becomes a lair. The attic is a lair until Antoinette transforms it. The forest is the corner Rochester keeps trying to enter and that keeps refusing him.</li>
+      <li>Objects as carriers of the three registers. Christophine's gold earrings: ornament (material), weight as authority and grounding (spiritual), gold as a form of wealth preserved and carried through generations of displacement, with specific roots in the <strong>Gold Coast (Ghana) and Akan</strong> goldsmithing traditions, where the metal carried sacred and political meaning long before it became colonial commodity (ancestral). The earrings on Christophine's lobes are gold the colonial economy could not fully extract.</li>
+      <li>The neckerchief Antoinette removes from Rochester's neck in Scene 6 and ties around her own wrist. An object that transfers from his body to hers. A restraint that becomes an ornament that becomes a claim. Track this object.</li>
+      <li>Hems as meeting points between body and ground. What different women's hems collect says something about their relationship to the land they walk.</li>
+      <li>The portrait of Annette as "the Creole imitation of the English lady of the manor." The Miller's Daughter painting that watches Young Antoinette throughout her childhood. Portraiture as colonial technology of legitimation. What happens when those portraits burn.</li>
+      <li>West African and Caribbean textile and material traditions. Christophine's silk turban elaborately tied. The weight of gold earrings. Indigo cloth.</li>
+      <li>Archival material that could enter the film itself. Property deeds, slave inventories, maps, natural history survey plates, proclamations, newspaper accounts of rebellions, letters between colonial administrators. Material that would actually have existed in Thornfield Hall as a house built on colonial wealth and that Antoinette could move through and burn.</li>
+      <li>Late 19th and early 20th century photographic archives of Jamaica. The Adolphe Duperly and Sons studio.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 15 IMAGE LANGUAGE -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">15</span>
+    <h2 class="section-title">Image Language / <em>The Unearthed</em></h2>
+    <span class="section-sub">Archival, strange, esoteric, textural. Outside the algorithm. Found rather than searched.</span>
+  </div>
+  <div class="section-body">
+    <p>You know what this means and you know what I am looking for. We have had this conversation enough times over enough years to know the difference between an image that is discovered and an image that is retrieved. I want the discovered ones. The ones that need dusting off. The ones that are in the archive box, not on the archive website. The image that earns its place because it was found, not because it was available.</p>
+    <p>We are building toward a living image archive. Something to move through, return to, build from. A lookbook and a language reference that can speak to my collaborators across the film. Something I can hand to the team and say: the film lives somewhere in here, find it.</p>
+    <ul class="threads">
+      <li>Daguerreotypes and early photographs of enslaved people in Jamaica and the wider Caribbean. Approach these through Tina Campt's methodology of listening to images. The ethical complexity of engaging with this material is part of the research.</li>
+      <li>Medical and psychiatric illustration from the colonial period and the Victorian asylum. The visual language used to classify and dehumanise.</li>
+      <li>Spirit photography and early photographic experiments with the invisible. Double exposure, aura photography, Kirlian imaging.</li>
+      <li>Abstract aerial and geological photography of Caribbean topography. The island seen from above as body, wound, formation.</li>
+      <li>Found footage, home movies, and vernacular photography from Caribbean communities. The domestic image as counter-archive.</li>
+      <li>The work of Roy DeCarava. Radcliffe Bailey. Lorna Simpson. Glenn Ligon. Memory, the Middle Passage, and the archive as artistic material.</li>
+      <li>Eugene Atget as a methodology. The systematic photographing of what remains, what is overlooked, what is residual.</li>
+      <li>Botanical illustration from the Caribbean. Plants surveyed, drawn, named, and extracted by European science.</li>
+      <li>Accidental and found images. Photographs where something unexpected entered the frame. Contact sheets with the images between the composed ones. The off-cuts of archives.</li>
+    </ul>
+    <div class="provocation-box">
+      <p class="box-label">Resonance Beyond the Subject</p>
+      <p>Some of the most useful images you will find will not be of Jamaica, will not be of the Caribbean, will not even be of the period or the themes named anywhere in this document. They will be images that <em>feel</em> like they want to be in conversation with this work. Images that resonate emotionally, energetically, by frequency, by residue, by vibe, by some unnameable quality that is doing the same thing the film is trying to do.</p>
+      <p>A photograph from rural Mali in the 1950s might speak to Granbois more than a photograph of Jamaica. A piece of contemporary land art might unlock something about the forest. A medieval European altarpiece might say something about Christophine's authority that no Caribbean source can. Trust those resonances. Bring them. The image that talks back to the work even when it sits outside its specific world is often the most valuable thing you can find.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><span class="divider-mark">A Note on Method</span></div>
+
+<div class="closing">
+  <p>Go wide before deep. Then go very deep. The most useful thing you will find is probably something that does not fit neatly anywhere in this document. Bring it anyway. Bring especially the things that seem to belong to two sections at once, or to none of them. Bring the thing you do not have language for yet. We will find the language together, as we always have.</p>
+  <p>The images I am most interested in are the ones that hold multiple things simultaneously without resolving them. The image that is beautiful and violent at once. The object that is devotional and dangerous at once. The sound that is grief and freedom at once. That is the tonality of this film. Research that finds material living in that register is the most valuable thing you can bring back.</p>
+  <p>Think of everything here as a field, not a checklist. Walk into it. Get lost in it. Find the path that was not on any map. The aim, always, is to make the revolution irresistible.</p>
+
+  <div class="sign">
+    <p class="name">JENN NKIRU</p>
+    <p class="date">Monday 27th April 2026</p>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
